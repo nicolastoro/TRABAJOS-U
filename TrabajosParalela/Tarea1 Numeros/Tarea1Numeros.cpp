@@ -45,14 +45,12 @@ int main(int argc, char argv[])
         }
     }
 
-
-    for(size_t h=0; h<cont; h++) {
-       varian+= pow((v[h]*h - med*h), 2.0);
+    //desviacion
+    for(int h=0; h<cont; h++) {
+       varian+= pow(((h+10)*v[h])-(med*v[h]), 2.0);
     }
     varian=varian/(cont-1);
-    varian=sqrt(varian);
-
-
+    varian = sqrt(varian);
 
         cout << "La Suma es: "<< suma << endl;
         cout << "Hay un total de: "<<cont<<"  notas"<< endl;
