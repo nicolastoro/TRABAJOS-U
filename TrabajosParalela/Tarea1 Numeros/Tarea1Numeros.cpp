@@ -2,14 +2,15 @@
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
-
+#include "math.h"
+#include "conio.h"
 using namespace std;
 
 
 double suma=0, cont=0, temp=0;
 int v[60], temp2=0;
 int moda=0,poc=0;
-float med;
+float med=0.0, varian=0, temp3;
 
 int main(int argc, char argv[])
 {
@@ -27,6 +28,7 @@ int main(int argc, char argv[])
             temp = (double)atof(linea);
             suma+=temp;
             cont++;
+            //variables para acumular frecuencia
             temp=((temp*10));
             temp=((temp-10));
             temp2=(int)temp;
@@ -35,16 +37,30 @@ int main(int argc, char argv[])
         fi.close();
         med=float(suma/cont);
 
+    //Moda
     for(int j=0;j<60;j++){
         if( v[j]>moda){
             moda=v[j];
             poc=j;
         }
     }
+
+
+    for(size_t h=0; h<cont; h++) {
+       varian+= pow((v[h]*h - med*h), 2.0);
+    }
+    varian=varian/(cont-1);
+    varian=sqrt(varian);
+
+
+
         cout << "La Suma es: "<< suma << endl;
         cout << "Hay un total de: "<<cont<<"  notas"<< endl;
         cout << "La Media es: "<< med << endl;
-        cout << "La Moda es: "<< poc+10 << " y se repitio "<<v[poc]<<" veces"<< endl;
+        temp3 = (float)poc;
+        temp3= (temp3/10);
+        cout << "La Moda es: "<< temp3+1 << " y se repitio "<<v[poc]<<" veces"<< endl;
+        cout << "La Varianza es: "<< varian << endl;
      }
     else cout << "Error al abrir el archivo" << endl;
     return 0;
